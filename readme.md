@@ -1,4 +1,4 @@
-#Readability App
+# Readability App
 
 <img src="./readability_app/templates/static/readability_icon.png">
 
