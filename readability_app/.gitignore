@@ -1,3 +1,11 @@
-.idea/
-/__pycache__/
+### Config files
+.idea
+*.gitignore
 *.DS_Store
+
+### documents
+*.csv
+*.docx
+*.xlsx
+*.pdf
+__pycache__
