@@ -1,0 +1,28 @@
+{%% extends 'base.html' %}
+
+{% block main_body %}
+<main role="main" class="inner cover">
+    <h1 class="cover-heading">
+        <a href="" class="typewrite" data-period="2000" data-type='["잘 읽히는 글을 쓰고 싶으신가요?",
+         "AI 기반 Readability와 함께", "당신의 글쓰기 실력을 키워보세요"]'>
+            <span class="wrap">
+                <script type="text/javascript" src="./dist/js/typewrite.js"></script>
+            </span>
+        </a>
+    </h1>
+
+    <p class="lead">
+        <br />
+        Readability는 여러 지표를 통해 가독성을 측정하고, 머신러닝을 통해 교정해야 할 부분을 보여주는 XGBoost 기반의 인공지능 글쓰기 교정 도구입니다.<br/>
+        Readability와 함께 당신의 글이 얼마나 읽기 쉬운지 확인하고, 교정해보세요!
+    </p>
+
+    <p class="lead">
+    <p class="btn-lead">
+        <a href="/about" class="btn btn-lg btn-secondary">
+            Readability는 어떻게 가독성을 평가하나요?
+        </a>
+    </p>
+    </p>
+</main>
+{% endblock %}

@@ -14,10 +14,10 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from readability_app.routes import main_route, predict_route, readability_route
+    from readability_app.routes import main_route, english_route, reference_route
     app.register_blueprint(main_route.bp)
-    app.register_blueprint(predict_route.bp, url_prefix='/api')
-    app.register_blueprint(readability_route.pb, url_prefix='/api')
+    app.register_blueprint(english_route.bp, url_prefix='/api')
+    app.register_blueprint(reference_route.pb, url_prefix='/api')
 
     return app
 

@@ -6,7 +6,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
     <script src="https://kit.fontawesome.com/dc44fbd621.js" crossorigin="anonymous"></script>
-    <title>English Readability</title>
+    <title>Readability</title>
 
     <!-- caconical link
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
@@ -31,37 +31,17 @@
             <nav class="nav nav-masthead justify-content-center">
                 <a class="nav-link active" href="/">Home</a>
                 <a class="nav-link" href="/english">English</a>
-                <a class="nav-link" href="/korean">Korean</a>
+                <a class="nav-link btn disabled" href="/korean">Korean</a>
                 <a class="nav-link" href="/references">References</a>
             </nav>
         </div>
     </header>
+    <!-- main body -->
 
-    <main role="main" class="inner cover">
-        <h1 class="cover-heading">
-            <a href="" class="typewrite" data-period="2000" data-type='["잘 읽히는 글을 쓰고 싶으신가요?", "Readability는 당신의 글을 보고", "글이 읽기 쉬운지 알려줍니다.",
-             "AI 기반 Readability와 함께", "당신의 글쓰기 실력을 키워보세요"]'>
-                <span class="wrap">
-                    <script type="text/javascript" src="./dist/js/typewrite.js"></script>
-                </span>
-            </a>
-        </h1>
+    {% block main_body %}{% endblock %}
 
-        <p class="lead">
-            <br />
-            Readability는 여러 지표를 통해 가독성을 측정하고, 머신러닝을 통해 교정해야 할 부분을 보여주는 XGBoost 기반의 인공지능 글쓰기 교정 도구입니다.<br/>
-            Readability와 함께 당신의 글이 얼마나 읽기 쉬운지 확인하고, 교정해보세요!
-        </p>
 
-        <p class="lead">
-        <p class="btn-lead">
-            <a href="/about" class="btn btn-lg btn-secondary">
-                Readability는 어떻게 가독성을 평가하나요?
-            </a>
-        </p>
-        </p>
-    </main>
-
+      <!-- footer -->
     <footer class="mastfoot mt-auto">
         <div class="inner">
             <p>Made by @Klassikcat and Powered by Heroku<br />
