@@ -1,34 +1,15 @@
-from readability import Readability
 import pandas as pd
 import numpy as np
-
-import nltk
-nltk.download('averaged_perceptron_tagger')
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('pos_tag')
-nltk.download('word_tags_sent')
-
 from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from nltk import pos_tag
-
 from spacy.tokenizer import Tokenizer
-
-import readability
-import spacy
-
-from sklearn import model_selection
-
-import warnings
-warnings.filterwarnings('ignore')
-import re
-
-import xgboost
+from nltk import pos_tag, pos_tag_sents
+import string
+import nltk
 
 def preprocessing(dataframe):
-    tmp = dataframe.apply(lambda e: e.replace('\n', ''))
+    dataframe = dataframe
+    dataframe = dataframe[['id', 'excerpt', 'target']]
+    tmp = dataframe['excerpt'].apply(lambda e: e.replace('\n', ''))
     excerpt_processed = []
     for e in tmp:
         # find alphabets
@@ -300,23 +281,3 @@ class CLRDataset:
 
     def __getitem__(self, idx: int):
         pass
-
-def predict_text(text):
-    text_len = text.split()
-    assert len(text_len) >= 100
-    try:
-        text_tmp = preprocessing(text)
-        text = CLRDataset(text_tmp, False)
-        text.dataframe = text.get_df()
-        text.dataframe['paragraph_avg_rot'] = cal_total_read_o_time(text.dataframe, '\n')
-        text.dataframe['sentence_avg_rot'] = cal_total_read_o_time(text.dataframe, '. ')
-        text.dataframe['total_avg_rot'] = [cal_read_o_time(i) for i in text.dataframe['excerpt']]
-        columns_except = ['id', 'excerpt', 'processed_exerpt']
-
-        text.column = text.column.drop(columms=columns_except)
-        model = xgboost.XGBRegressor(n_jobs=-1, booster='gbtree', random_state=42, n_estimators=100, verbosity=0)
-        pred_y = model.predict(text.dataframe)
-
-        return pred_y
-    except:
-        return "최소 100글자의 글을 입력해야 합니다."

@@ -8,9 +8,6 @@
     <script src="https://kit.fontawesome.com/dc44fbd621.js" crossorigin="anonymous"></script>
     <title>Readability</title>
 
-    <!-- caconical link
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
-    -->
 
     <!-- Bootstrap core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -18,7 +15,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
+    <link href="/static/cover.css" rel="stylesheet">
   </head>
 
   <body class="text-center">
@@ -26,7 +23,7 @@
     <header class="masthead mb-auto">
         <div class="inner">
             <h3 class="masthead-brand">
-                <img src="./static/readability_icon.png", height="25px">
+                <img src="../static/readability_icon.png" , height="25px">
             </h3>
             <nav class="nav nav-masthead justify-content-center">
                 <a class="nav-link active" href="/">Home</a>
@@ -36,12 +33,13 @@
             </nav>
         </div>
     </header>
+
     <!-- main body -->
 
     {% block main_body %}{% endblock %}
 
 
-      <!-- footer -->
+    <!-- footer -->
     <footer class="mastfoot mt-auto">
         <div class="inner">
             <p>Made by @Klassikcat and Powered by Heroku<br />
@@ -68,8 +66,7 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="./assets/js/vendor/popper.min.js"></script>
-    <script src="./dist/js/bootstrap.min.js"></script>
+    <script src="../static/src/vendor/popper.min.js"></script>
+    <script src="../static/src/bootstrap.min.js"></script>
   </body>
 </html>
