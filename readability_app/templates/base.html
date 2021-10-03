@@ -15,24 +15,13 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="/static/cover.css" rel="stylesheet">
+    <link href="/static/style.css" rel="stylesheet">
+    {% block additional_css %}{% endblock %}
   </head>
 
   <body class="text-center">
   <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-    <header class="masthead mb-auto">
-        <div class="inner">
-            <h3 class="masthead-brand">
-                <img src="../static/readability_icon.png" , height="25px">
-            </h3>
-            <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="/">Home</a>
-                <a class="nav-link" href="/english">English</a>
-                <a class="nav-link btn disabled" href="/korean">Korean</a>
-                <a class="nav-link" href="/references">References</a>
-            </nav>
-        </div>
-    </header>
+  {% block header %}{% endblock %}
 
     <!-- main body -->
 
@@ -66,7 +55,6 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="../static/src/vendor/popper.min.js"></script>
     <script src="../static/src/bootstrap.min.js"></script>
   </body>
 </html>

@@ -1,43 +1,34 @@
 {% extends 'base.html' %}
 
+{% block additional_css %}
+<link href="/static/form.css" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<header class="masthead mb-auto">
+    <div class="inner">
+        <h3 class="masthead-brand">
+            <img src="../static/readability_icon.png" , height="25px">
+        </h3>
+        <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="/">Home</a>
+            <a class="nav-link" href="/english">English</a>
+            <a class="nav-link btn disabled" href="/korean">Korean</a>
+            <a class="nav-link" href="/references">References</a>
+        </nav>
+    </div>
+</header>
+{% endblock %}
+
 {% block main_body %}
 <main role="main" class="inner cover">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <form method="POST" action="/api/editor">
-                    <div class="form">
-                        <label for="exampleFormControlTextarea1">Text</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
+    <div class="form_english">
+        <form method="POST" action="/result_english">
+            <div class="form-group form-group-lg">
+                <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" placeholder="100자 이상의 영문자를 사용해야 올바른 결과가 나옵니다."></textarea>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <table class="table table-striped table-bordered" style="color: white;">
-                    <thead>
-                    <tr>
-                        <th>가독성</th>
-                        <th>읽는 데에 걸리는 시간</th>
-                        <th>접속사 숫자</th>
-                        <th>어휘 다양성</th>
-                        <th>드물게 쓰는 어휘 개수</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th></th>
-                        <td>{{readability}}</td>
-                        <td>{{words_len}}</td>
-                        <td>{{conjunction}}</td>
-                        <td>{{voca_diverse}}</td>
-                        <td>{{rare_words}}</td>
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-primary">가독성 검사하기</button>
+        </form>
     </div>
 </main>
 {% endblock %}

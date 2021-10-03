@@ -1,0 +1,53 @@
+{% extends base.html %}
+
+{% block additional_css %}
+<link href="/static/table.css" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+<header class="masthead mb-auto">
+    <div class="inner">
+        <h3 class="masthead-brand">
+            <img src="../static/readability_icon.png" , height="25px">
+        </h3>
+        <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link active" href="/">Home</a>
+            <a class="nav-link" href="/english">English</a>
+            <a class="nav-link btn disabled" href="/korean">Korean</a>
+            <a class="nav-link" href="/references">References</a>
+        </nav>
+    </div>
+</header>
+{% endblock %}
+
+{% block main_body %}
+<div class="row">
+
+</div>
+<div class="row">
+    <table class="metrics-table">
+        <thead>
+        <tr>
+            <th>가독성 점수</th>
+            <th>문자 수</th>
+            <th>읽는 데에 걸리는 시간</th>
+            <th>접속사 숫자</th>
+            <th>어휘 다양성</th>
+            <th>가장 긴 단어의 글자수</th>
+            <th>드물게 쓰는 어휘 개수</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ words_len }}</td>
+            <td>{{ words_len }}</td>
+            <td>{{ read_o_time }}</td>
+            <td>{{ conjunction }}</td>
+            <td>{{ voca_diverse }}</td>
+            <td>{{ longest_word }}</td>
+            <td>{{ unique_words }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+{% endblock %}
