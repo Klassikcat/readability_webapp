@@ -9,8 +9,9 @@ migrate = Migrate()
 def create_app():
     app = Flask(__name__)
 
-    app.config['SQLALCHEMY'] = os.getenv('DATABASE_URL_ARTICLE')
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///orm_db.sqlite3'
 
+    from readability_app.models import domain_table, text_table, language_table
     db.init_app(app)
     migrate.init_app(app, db)
 

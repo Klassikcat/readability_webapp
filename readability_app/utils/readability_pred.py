@@ -1,7 +1,7 @@
-from readability import Readability
+import readability
 import pandas as pd
 import numpy as np
-
+import os
 import nltk
 nltk.download('averaged_perceptron_tagger')
 nltk.download('punkt')
@@ -26,33 +26,7 @@ warnings.filterwarnings('ignore')
 import re
 
 import xgboost
-
-def preprocessing(dataframe):
-    tmp = dataframe.apply(lambda e: e.replace('\n', ''))
-    excerpt_processed = []
-    for e in tmp:
-        # find alphabets
-        e = re.sub("[^a-zA-Z]", " ", e)
-
-        # convert to lower case
-        e = e.lower()
-
-        # tokenize words
-        e = nltk.word_tokenize(e)
-
-        # remove stopwords
-        e = [word for word in e if not word in set(stopwords.words("english"))]
-
-        # lemmatization
-        lemma = nltk.WordNetLemmatizer()
-        e = [lemma.lemmatize(word) for word in e]
-        e = " ".join(e)
-
-        excerpt_processed.append(e)
-
-    dataframe['processed_exerpt'] = excerpt_processed
-    return dataframe
-
+import pickle
 
 def mean(list):
     return sum(list) / len(list)
@@ -276,16 +250,6 @@ class CLRDataset:
                                           "preposition_b"])
         self.df = pd.merge(self.df, scores_df, left_index=True, right_index=True)
 
-        spacy_df = pd.DataFrame(spacy_features(self.df), columns=get_spacy_col_names())
-        self.df = pd.merge(self.df, spacy_df, left_index=True, right_index=True)
-
-        pos_df = pd.DataFrame(self.df["excerpt"].apply(lambda p: pos_tag_features(p)).tolist(),
-                              columns=["CC", "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD",
-                                       "NN", "NNS", "NNP", "NNPS", "PDT", "POS", "PRP", "RB", "RBR", "RBS", "RP", "TO",
-                                       "UH",
-                                       "VB", "VBD", "VBG", "VBZ", "WDT", "WP", "WRB"])
-        self.df = pd.merge(self.df, pos_df, left_index=True, right_index=True)
-
         other_df = pd.DataFrame(self.df["excerpt"].apply(lambda p: generate_other_features(p)).tolist(),
                                 columns=["periods", "commas", "semis", "exclaims", "questions",
                                          "num_char", "num_words", "unique_words", "word_diversity",
@@ -302,21 +266,26 @@ class CLRDataset:
         pass
 
 def predict_text(text):
-    text_len = text.split()
-    assert len(text_len) >= 100
-    try:
-        text_tmp = preprocessing(text)
-        text = CLRDataset(text_tmp, False)
-        text.dataframe = text.get_df()
-        text.dataframe['paragraph_avg_rot'] = cal_total_read_o_time(text.dataframe, '\n')
-        text.dataframe['sentence_avg_rot'] = cal_total_read_o_time(text.dataframe, '. ')
-        text.dataframe['total_avg_rot'] = [cal_read_o_time(i) for i in text.dataframe['excerpt']]
-        columns_except = ['id', 'excerpt', 'processed_exerpt']
+    text = pd.DataFrame(data=[text], columns=['excerpt'])
+    text = CLRDataset(text, False)
+    dataframe = text.get_df()
+    dataframe['paragraph_avg_rot'] = cal_total_read_o_time(dataframe, '\n')
+    dataframe['sentence_avg_rot'] = cal_total_read_o_time(dataframe, '. ')
+    columns_except = ['excerpt']
 
-        text.column = text.column.drop(columms=columns_except)
-        model = xgboost.XGBRegressor(n_jobs=-1, booster='gbtree', random_state=42, n_estimators=100, verbosity=0)
-        pred_y = model.predict(text.dataframe)
-
-        return pred_y
-    except:
-        return "최소 100글자의 글을 입력해야 합니다."
+    dataframe = dataframe.drop(columns=columns_except)
+    """
+    model = xgboost.XGBRegressor(n_jobs=-1, booster='dart', random_state=42, n_estimators=100, verbosity=0)
+    filepath = '../static/model_weights.pkl'
+    path = os.path.join(os.path.dirname(__file__), filepath)
+    model = pickle.load(open(path, 'rb'))
+    pred_y = model.predict(dataframe)
+    """
+    pred_y = dataframe['ari']
+    words_len = dataframe['num_words']
+    rot = dataframe['paragraph_avg_rot']
+    conj = dataframe['conjunction']
+    voca_div = dataframe['word_diversity']
+    longest_word = dataframe['longest_word']
+    unique_word = dataframe['unique_words']
+    return pred_y, words_len, rot, conj, voca_div, longest_word, unique_word

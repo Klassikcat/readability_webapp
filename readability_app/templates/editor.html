@@ -2,6 +2,7 @@
 
 {% block additional_css %}
 <link href="/static/form.css" rel="stylesheet">
+<link href="/static/table.css" rel="stylesheet">
 {% endblock %}
 
 {% block header %}
@@ -22,13 +23,71 @@
 
 {% block main_body %}
 <main role="main" class="inner cover">
+    <div class="lead">
+        {% if request.method == 'POST' %}
+        <div class="row">
+            <h2>Result</h2>
+        </div>
+    </div>
+    <div class="lead">
+        <div class="form_group">
+            <fieldset disabled>
+                <div class="form-group form-group-lg">
+                    <textarea class="form-control" name="text_name" id="disabledInput", rows="20">{{ text }}</textarea>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="lead">
+            <table class="metrics-table">
+                <thead>
+                <tr>
+                    <th>가독성 점수</th>
+                    <th>문자 수</th>
+                    <th>읽는 데에 걸리는 시간</th>
+                    <th>접속사 숫자</th>
+                    <th>어휘 다양성</th>
+                    <th>가장 긴 단어의 글자수</th>
+                    <th>드물게 쓰는 어휘 개수</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ words_len }}</td>
+                    <td>{{ words_len }}</td>
+                    <td>{{ read_o_time }}</td>
+                    <td>{{ conjunction }}</td>
+                    <td>{{ voca_diverse }}</td>
+                    <td>{{ longest_word }}</td>
+                    <td>{{ unique_words }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+        </div>
+    {% if request.method == 'GET' %}
     <div class="form_english">
-        <form method="POST" action="/result_english">
+        <form method="POST", action="/english">
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">글의 목적</label>
+                <select class="form-control" name="domain_name" id="exampleFormControlSelect1">
+                    <option>연설</option>
+                    <option>편지</option>
+                    <option>소설</option>
+                    <option>에세이</option>
+                    <option>자기소개서</option>
+                </select>
+            </div>
             <div class="form-group form-group-lg">
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="20" placeholder="100자 이상의 영문자를 사용해야 올바른 결과가 나옵니다."></textarea>
+                <textarea class="form-control is-valid" name="text_name" id="exampleFormControlTextarea1", rows="20" placeholder="100자 이상의 영문자를 사용해야 올바른 결과가 나옵니다."></textarea>
+            </div>
+            <div class="invalid-feedback">
+                영어로 된 문자를 입력해주세요.
             </div>
             <button type="submit" class="btn btn-primary">가독성 검사하기</button>
         </form>
     </div>
+    {% endif %}
 </main>
 {% endblock %}
