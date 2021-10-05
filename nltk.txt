@@ -1,0 +1,6 @@
+averaged_perceptron_tagger
+punkt
+stopwords
+wordnet
+pos_tag
+word_tags_sent
