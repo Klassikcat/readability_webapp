@@ -1,4 +1,5 @@
 from readability_app import db
+from readability_app.models import domain_table, language_table
 
 class Text(db.Model):
     __tablename__ = 'text'
@@ -16,5 +17,10 @@ class Text(db.Model):
     longest = db.Column(db.Integer())
     rare_word = db.Column(db.Integer())
 
-    lang_rel = db.relationship('Language', backref='text_rel')
-    domain_rel = db.relationship('Domain', backref='text_rel')
+    lang_rel = db.relationship(language_table.Language, backref='text_rel', cascade='all')
+    domain_rel = db.relationship(domain_table.Domain, backref='text_rel', cascade='all')
+
+    def __repr__(self):
+        return f"Text('{self.txt}', '{self.readability}', '{self.lang_id}', '{self.domain_id}'" \
+               f"'{self.length}', '{self.rot}', '{self.conjunction}', '{self.word_div}', " \
+               f"'{self.longest}', {self.rare_word})"

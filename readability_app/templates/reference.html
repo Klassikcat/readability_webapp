@@ -5,22 +5,99 @@
 <link href="/static/table.css" rel="stylesheet">
 {% endblock %}
 
-{% block header %}
-<header class="masthead mb-auto">
-    <div class="inner">
-        <h3 class="masthead-brand">
-            <img src="../static/readability_icon.png" , height="25px">
-        </h3>
-        <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="/">Home</a>
-            <a class="nav-link" href="/english">English</a>
-            <a class="nav-link btn disabled" href="/korean">Korean</a>
-            <a class="nav-link" href="/references">References</a>
-        </nav>
-    </div>
-</header>
-{% endblock %}
-
 {% block main_body %}
 
+<main role="main" class="inner cover">
+    <div class="main_content">
+        <div class="lead">
+        <h2>검색</h2>
+        </div>
+        <div class="lead">
+            <form method="GET", action="/reference">
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <input type="text" class="form-control" id="Text_search" name="Text_search" placeholder="검색어를 입력하세요">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <select id="language" class="form-control" name="Language_search">
+                            <option selected>English</option>
+                            <option>한국어</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <select id="domain" name="Domain_search" class="form-control">
+                            <option selected>연설</option>
+                            <option>편지</option>
+                            <option>소설</option>
+                            <option>에세이</option>
+                            <option>자기소개서</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="lead">
+                    <button type="submit" class="btn btn-add">검색</button>
+                </div>
+            </form>
+        </div>
+    {% if measure_list %}
+    </div>
+    <div class="main_content">
+        <div class="lead">
+            <h2>검색 결과</h2>
+        </div>
+        {% for frac in measure_list %}
+        <div class="lead">
+            <br />
+            <hr>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="metrics-table">
+                        <thead>
+                        <tr>
+                            <th>가독성 점수</th>
+                            <th>문자 수</th>
+                            <th>읽는 데에 걸리는 시간</th>
+                            <th>접속사 숫자</th>
+                            <th>어휘 다양성</th>
+                            <th>가장 긴 단어의 글자수</th>
+                            <th>드물게 쓰는 어휘 개수</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>{{ frac.readability }}</td>
+                            <td>{{ frac.length }}</td>
+                            <td>{{ frac.rot }}</td>
+                            <td>{{ frac.conjunction }}</td>
+                            <td>{{ frac.word_div }}</td>
+                            <td>{{ frac.longest }}</td>
+                            <td>{{ frac.rare_word }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form_group">
+                <fieldset disabled>
+                    <div class="form-group form-group-lg">
+                        <textarea class="form-control" name="text_name" id="disabledInput", rows="20">{{ frac.txt }}</textarea>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+        <div class="lead">
+            <div class="form_group" method="DELETE">
+                <div class="col-md-12">
+                    <form method="DELETE">
+                        <div class="col">
+                            <a type="delete" class="btn btn-del" name="del_frac" href="/api/reference/{{ id }}">Delete</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</main>
 {% endblock %}

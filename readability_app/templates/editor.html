@@ -5,89 +5,86 @@
 <link href="/static/table.css" rel="stylesheet">
 {% endblock %}
 
-{% block header %}
-<header class="masthead mb-auto">
-    <div class="inner">
-        <h3 class="masthead-brand">
-            <img src="../static/readability_icon.png" , height="25px">
-        </h3>
-        <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="/">Home</a>
-            <a class="nav-link" href="/english">English</a>
-            <a class="nav-link btn disabled" href="/korean">Korean</a>
-            <a class="nav-link" href="/references">References</a>
-        </nav>
-    </div>
-</header>
-{% endblock %}
-
 {% block main_body %}
-<main role="main" class="inner cover">
-    <div class="lead">
-        {% if request.method == 'POST' %}
-        <div class="row">
-            <h2>Result</h2>
-        </div>
-    </div>
-    <div class="lead">
-        <div class="form_group">
-            <fieldset disabled>
-                <div class="form-group form-group-lg">
-                    <textarea class="form-control" name="text_name" id="disabledInput", rows="20">{{ text }}</textarea>
-                </div>
-            </fieldset>
-        </div>
-
+<div class="main_content">
+    <main role="main" class="inner cover">
         <div class="lead">
-            <table class="metrics-table">
-                <thead>
-                <tr>
-                    <th>가독성 점수</th>
-                    <th>문자 수</th>
-                    <th>읽는 데에 걸리는 시간</th>
-                    <th>접속사 숫자</th>
-                    <th>어휘 다양성</th>
-                    <th>가장 긴 단어의 글자수</th>
-                    <th>드물게 쓰는 어휘 개수</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{ words_len }}</td>
-                    <td>{{ words_len }}</td>
-                    <td>{{ read_o_time }}</td>
-                    <td>{{ conjunction }}</td>
-                    <td>{{ voca_diverse }}</td>
-                    <td>{{ longest_word }}</td>
-                    <td>{{ unique_words }}</td>
-                </tr>
-                </tbody>
-            </table>
+            {% if request.method == 'POST' %}
+            <div class="row">
+                <h2>Result</h2>
+                <br />
+            </div>
+        </div>
+        <div class="lead">
+            <div class="form_group">
+                <fieldset disabled>
+                    <div class="form-group form-group-lg">
+                        <textarea class="form-control" name="text_name" id="disabledInput", rows="20">{{ text }}</textarea>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="lead">
+                <table class="metrics-table">
+                    <thead>
+                    <tr>
+                        <th>가독성 점수</th>
+                        <th>문자 수</th>
+                        <th>읽는 데에 걸리는 시간</th>
+                        <th>접속사 숫자</th>
+                        <th>어휘 다양성</th>
+                        <th>가장 긴 단어의 글자수</th>
+                        <th>드물게 쓰는 어휘 개수</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>{{ readability }}</td>
+                        <td>{{ words_len }}</td>
+                        <td>{{ read_o_time }}</td>
+                        <td>{{ conjunction }}</td>
+                        <td>{{ voca_diverse }}</td>
+                        <td>{{ longest_word }}</td>
+                        <td>{{ unique_words }}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+        {% if request.method == 'GET' %}
+        <div class="form_english">
+            <form method="POST", action="/english">
+                <div class="lead">
+                    <h2>가독성 검사하기</h2>
+                    <br />
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control is-valid" name="text_name" id="exampleFormControlTextarea1", rows="20" placeholder="100자 이상의 영문자를 사용해야 올바른 결과가 나옵니다."></textarea>
+                </div>
+                <div class="invalid-feedback">
+                    영어로 된 문자를 입력해주세요.
+                </div>
+                <div class="row">
+                    <div class="left-label">
+                        <p>글의 목적을 선택하신 뒤 가독성 검사하기 버튼을 눌러주세요.</p>
+                    </div>
+                    <div class="form-group col-8">
+                        <select class="form-control" name="domain_name" id="exampleFormControlSelect1">
+                            <option>연설</option>
+                            <option>편지</option>
+                            <option>소설</option>
+                            <option>에세이</option>
+                            <option>자기소개서</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-add">가독성 검사하기</button>
+                    </div>
+                </div>
+            </form>
         </div>
         {% endif %}
-        </div>
-    {% if request.method == 'GET' %}
-    <div class="form_english">
-        <form method="POST", action="/english">
-            <div class="form-group">
-                <label for="exampleFormControlSelect1">글의 목적</label>
-                <select class="form-control" name="domain_name" id="exampleFormControlSelect1">
-                    <option>연설</option>
-                    <option>편지</option>
-                    <option>소설</option>
-                    <option>에세이</option>
-                    <option>자기소개서</option>
-                </select>
-            </div>
-            <div class="form-group form-group-lg">
-                <textarea class="form-control is-valid" name="text_name" id="exampleFormControlTextarea1", rows="20" placeholder="100자 이상의 영문자를 사용해야 올바른 결과가 나옵니다."></textarea>
-            </div>
-            <div class="invalid-feedback">
-                영어로 된 문자를 입력해주세요.
-            </div>
-            <button type="submit" class="btn btn-primary">가독성 검사하기</button>
-        </form>
-    </div>
-    {% endif %}
-</main>
+    </main>
+</div>
 {% endblock %}

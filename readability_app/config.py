@@ -33,3 +33,16 @@ config_by_name = dict(
 )
 
 key = Config.SECRET_KEY
+
+domain_list = {
+    '연설': 1,
+    '편지': 2,
+    '소설': 3,
+    '에세이': 4,
+    '자기소개서': 5
+}
+
+language_list = {
+    'English': 1,
+    '한국어': 2
+}

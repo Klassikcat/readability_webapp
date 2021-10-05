@@ -49,6 +49,12 @@ a:hover {
   border: .05rem solid #fff;
 }
 
+.main_content{
+  background: #f8f9fa;
+  padding: 2em;
+  margin: 2em;
+  border-radius: 20px;
+}
 
 /*
  * Base structure
@@ -57,7 +63,9 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-image: linear-gradient(to top, #20C691 0%, #20C691 10%, white 10%, white 100%);
+  background: linear-gradient(347deg, #20C691 0%, #20C691 35%, white 35%, white 100%);
+  background-attachment: fixed;
+
 }
 
 body {
@@ -70,6 +78,11 @@ body {
   color: #0c0d14;
 }
 * { color:#0c0d14; text-decoration: none;}
+
+.left-label{
+  text-align: left;
+  font-weight: bold;
+}
 
 /* if 80em > display > 50em */
 @media (min-width:80em) {

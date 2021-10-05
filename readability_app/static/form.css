@@ -4,6 +4,13 @@
     height: 475px;
 }
 
-.btn-primary {
-    color: #198070;
+.btn-add {
+    background-color: #189870;
+    color: #fff;
 }
+
+.btn-del {
+    background-color: #E54555;
+    color: #fff;
+}
+
