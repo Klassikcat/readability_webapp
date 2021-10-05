@@ -28,15 +28,8 @@ def ref_index():
                                                         text_table.Text.txt.ilike('%%{}%%'.format(text_ref))
                                                         ).all()
 
-            full_text = text_table.Text.query.filter(text_table.Text.domain_id == domain,
-                                                    text_table.Text.lang_id == language,
-                                                    text_table.Text.txt.ilike('%%{}%%'.format(text_ref))
-                                                    ).first()
-            id = full_text.id
-
         return render_template('reference.html', measure_list=measure_list, text_ref=text_ref,
-                               domain=domain_list.get(domain), language=language_list.get(language),
-                               id=id)
+                               domain=domain_list.get(domain), language=language_list.get(language))
     else:
         return render_template('reference.html')
 

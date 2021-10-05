@@ -274,13 +274,6 @@ def predict_text(text):
     columns_except = ['excerpt']
 
     dataframe = dataframe.drop(columns=columns_except)
-    """
-    model = xgboost.XGBRegressor(n_jobs=-1, booster='dart', random_state=42, n_estimators=100, verbosity=0)
-    filepath = '../static/model_weights.pkl'
-    path = os.path.join(os.path.dirname(__file__), filepath)
-    model = pickle.load(open(path, 'rb'))
-    pred_y = model.predict(dataframe)
-    """
     pred_y = dataframe['ari']
     words_len = dataframe['num_words']
     rot = dataframe['paragraph_avg_rot']
