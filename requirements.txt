@@ -19,6 +19,7 @@ cmarkgfm == 0.4.2
 colorama == 0.4.3
 config == 0.5.1
 cryptography == 3.4.7
+mkl-service == 2.3.0
 cycler == 0.10.0
 cymem == 2.0.5
 decorator == 4.4.2
