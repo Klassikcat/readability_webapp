@@ -1,1 +1,1 @@
-web: gunicorn --workers=2 'readability_app:create_app()'
+web:gunicorn --workers=2 'readability_app:create_app()'
