@@ -1,1 +1,1 @@
-web: gunicorn dep:app --workers=2 'readability_app:create_app()'
+web: gunicorn dep:app --workers=2 --bind 0.0.0.0:$PORT 'readability_app:create_app()'
