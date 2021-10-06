@@ -1,5 +1,4 @@
 averaged_perceptron_tagger
 stopwords
 wordnet
-pos_tag
 word_tags_sent
