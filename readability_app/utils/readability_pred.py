@@ -6,8 +6,6 @@ from spacy.tokenizer import Tokenizer
 import readability
 import spacy
 
-from sklearn import model_selection
-
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -151,43 +149,6 @@ def generate_other_features(passage: str):
             num_char, num_words, unique_words, word_diversity,
             longest_word, avg_len_word]
 
-
-def create_folds(data: pd.DataFrame, num_splits: int):
-    """
-    This function creates a kfold cross validation system based on this reference:
-    https://www.kaggle.com/abhishek/step-1-create-folds
-    """
-    # we create a new column called kfold and fill it with -1
-    data["kfold"] = -1
-
-    # the next step is to randomize the rows of the data
-    data = data.sample(frac=1, random_state=42).reset_index(drop=True)
-
-    # calculate number of bins by Sturge's rule
-    # I take the floor of the value, you can also
-    # just round it
-    num_bins = int(np.floor(1 + np.log2(len(data))))
-
-    # bin targets
-    data.loc[:, "bins"] = pd.cut(
-        data["target"], bins=num_bins, labels=False
-    )
-
-    # initiate the kfold class from model_selection module
-    kf = model_selection.StratifiedKFold(n_splits=num_splits)
-
-    # fill the new kfold column
-    # note that, instead of targets, we use bins!
-    for f, (t_, v_) in enumerate(kf.split(X=data, y=data.bins.values)):
-        data.loc[v_, 'kfold'] = f
-
-    # drop the bins column
-    data = data.drop("bins", axis=1)
-
-    # return dataframe with folds
-    return data
-
-
 class CLRDataset:
     """
     This is my CommonLit Readability Dataset.
@@ -200,9 +161,6 @@ class CLRDataset:
         self.excerpts = df["excerpt"]
 
         self._extract_features()
-
-        if train:
-            self.df = create_folds(self.df, n_folds)
 
     def _extract_features(self):
         scores_df = pd.DataFrame(self.df["excerpt"].apply(lambda p: readability_measurements(p)).tolist(),
