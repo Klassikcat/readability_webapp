@@ -125,6 +125,5 @@ webencodings == 0.5.1
 Werkzeug == 2.0.0
 wheel == 0.37.0
 wrapt == 1.12.1
-xgboost == 1.4.2
 xlrd == 2.0.1
 zipp == 3.5.0
