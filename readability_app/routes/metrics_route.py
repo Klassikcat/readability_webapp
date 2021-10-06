@@ -4,7 +4,7 @@ from readability_app.models import text_table
 from readability_app import db
 from readability_app.config import domain_list
 
-bp = Blueprint('english', __name__)
+bp = Blueprint('metircs', __name__)
 
 # English Readability Page
 @bp.route('/english', methods=['GET','POST'])
@@ -33,3 +33,7 @@ def eng_index():
                            readability=pred_y, words_len=words_len, read_o_time=rot,
                            conjunction=conj, voca_diverse=voca_div, longest_word=longest_word,
                            unique_words=unique_word)
+
+@bp.route('/korean')
+def kor_index():
+    return render_template('under_construction.html')

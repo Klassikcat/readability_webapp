@@ -5,6 +5,29 @@
 <link href="/static/table.css" rel="stylesheet">
 {% endblock %}
 
+{% block header %}
+<header class="masthead mb-auto">
+    <div class="inner">
+        <h3 class="masthead-brand">
+            <a href="/">
+                <img src="../static/readability_icon.png", height="25px">
+            </a>
+        </h3>
+        <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link" href="/">Home</a>
+            {% if request.path == '/english' %}
+            <a class="nav-link active" href="/english">English</a>
+            <a class="nav-link btn disabled" href="/korean">Korean</a>
+            {% else %}
+            <a class="nav-link" href="/english">English</a>
+            <a class="nav-link active btn disabled" href="/korean">Korean</a>
+            {% endif %}
+            <a class="nav-link" href="/reference">References</a>
+        </nav>
+    </div>
+</header>
+{% endblock %}
+
 {% block main_body %}
 <div class="main_content">
     <main role="main" class="inner cover">

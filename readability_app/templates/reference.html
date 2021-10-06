@@ -5,42 +5,30 @@
 <link href="/static/table.css" rel="stylesheet">
 {% endblock %}
 
-{% block main_body %}
 
-<main role="main" class="inner cover">
-    <div class="main_content">
-        <div class="lead">
-        <h2>검색</h2>
-        </div>
-        <div class="lead">
-            <form method="GET", action="/reference">
-                <div class="form-row">
-                    <div class="form-group col-md-8">
-                        <input type="text" class="form-control" id="Text_search" name="Text_search" placeholder="검색어를 입력하세요">
-                    </div>
-                    <div class="form-group col-md-2">
-                        <select id="language" class="form-control" name="Language_search">
-                            <option selected>English</option>
-                            <option>한국어</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <select id="domain" name="Domain_search" class="form-control">
-                            <option selected>연설</option>
-                            <option>편지</option>
-                            <option>소설</option>
-                            <option>에세이</option>
-                            <option>자기소개서</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="lead">
-                    <button type="submit" class="btn btn-add">검색</button>
-                </div>
-            </form>
-        </div>
-    {% if measure_list %}
+{% block header %}
+<header class="masthead mb-auto">
+    <div class="inner">
+        <h3 class="masthead-brand">
+            <a href="/">
+                <img src="../static/readability_icon.png", height="25px">
+            </a>
+        </h3>
+        <nav class="nav nav-masthead justify-content-center">
+            <a class="nav-link" href="/">Home</a>
+            <a class="nav-link" href="/english">English</a>
+            <a class="nav-link btn disabled" href="/korean">Korean</a>
+            <a class="nav-link active" href="/reference">References</a>
+        </nav>
     </div>
+</header>
+{% endblock %}
+
+
+{% block main_body %}
+<main role="main" class="inner cover">
+    {% if measure_list %}
+    <!-- search result -->
     <div class="main_content">
         <div class="lead">
             <h2>검색 결과</h2>
@@ -99,5 +87,40 @@
         {% endfor %}
     </div>
     {% endif %}
+    <!-- Search table -->
+    <div class="main_content">
+        {% if not measure_list %}
+        <div class="lead">
+            <h2>검색</h2>
+        </div>
+        {% endif %}
+        <div class="lead">
+            <form method="GET", action="/reference">
+                <div class="form-row">
+                    <div class="form-group col-md-8">
+                        <input type="text" class="form-control" id="Text_search" name="Text_search" placeholder="검색어를 입력하세요">
+                    </div>
+                    <div class="form-group col-md-2">
+                        <select id="language" class="form-control" name="Language_search">
+                            <option selected>English</option>
+                            <option>한국어</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <select id="domain" name="Domain_search" class="form-control">
+                            <option selected>연설</option>
+                            <option>편지</option>
+                            <option>소설</option>
+                            <option>에세이</option>
+                            <option>자기소개서</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="lead">
+                    <button type="submit" class="btn btn-add">검색</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </main>
 {% endblock %}

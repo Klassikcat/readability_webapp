@@ -9,9 +9,9 @@ bp = Blueprint('main', __name__)
 def index():
     return render_template('index.html')
 
-@bp.route('/korean')
-def kor_index():
-    return render_template('under_construction.html')
+@bp.route('/about')
+def about_index():
+    return render_template('about.html')
 
 @bp.route('/reference')
 def ref_index():

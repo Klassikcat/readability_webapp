@@ -15,9 +15,9 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
 
-    from readability_app.routes import (main_route, english_route, reference_route)
+    from readability_app.routes import (main_route, metrics_route, reference_route)
     app.register_blueprint(main_route.bp)
-    app.register_blueprint(english_route.bp)
+    app.register_blueprint(metrics_route.bp)
     app.register_blueprint(reference_route.bp, url_prefix='/api')
 
     return app
