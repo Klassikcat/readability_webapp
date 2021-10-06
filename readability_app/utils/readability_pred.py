@@ -1,10 +1,10 @@
 import pandas as pd
 import numpy as np
 
-import spacy
 from spacy.tokenizer import Tokenizer
 
 import readability
+import spacy
 
 from sklearn import model_selection
 
