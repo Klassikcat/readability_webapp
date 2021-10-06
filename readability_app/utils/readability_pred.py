@@ -1,18 +1,5 @@
-import readability
 import pandas as pd
 import numpy as np
-import os
-import nltk
-nltk.download('averaged_perceptron_tagger')
-nltk.download('punkt')
-nltk.download('stopwords')
-nltk.download('wordnet')
-nltk.download('pos_tag')
-nltk.download('word_tags_sent')
-
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from nltk import pos_tag
 
 from spacy.tokenizer import Tokenizer
 
@@ -23,10 +10,6 @@ from sklearn import model_selection
 
 import warnings
 warnings.filterwarnings('ignore')
-import re
-
-import xgboost
-import pickle
 
 def mean(list):
     return sum(list) / len(list)
@@ -141,24 +124,6 @@ def get_spacy_col_names():
         names.append(f"spacy_{i}")
 
     return names
-
-
-def pos_tag_features(passage: str):
-    """
-    This function counts the number of times different parts of speech occur in an excerpt
-    """
-    pos_tags = ["CC", "CD", "DT", "EX", "FW", "IN", "JJ", "JJR", "JJS", "LS", "MD",
-                "NN", "NNS", "NNP", "NNPS", "PDT", "POS", "PRP", "RB", "RBR", "RBS", "RP", "TO", "UH",
-                "VB", "VBD", "VBG", "VBZ", "WDT", "WP", "WRB"]
-
-    tags = pos_tag(word_tokenize(passage))
-    tag_list = list()
-
-    for tag in pos_tags:
-        tag_list.append(len([i[0] for i in tags if i[1] == tag]))
-
-    return tag_list
-
 
 def generate_other_features(passage: str):
     """
