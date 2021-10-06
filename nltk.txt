@@ -1,4 +1,0 @@
-averaged_perceptron_tagger
-stopwords
-wordnet
-word_tags_sent
