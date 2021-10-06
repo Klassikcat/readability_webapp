@@ -123,10 +123,11 @@ class CLRDataset:
         pass
 
 def predict_text(text):
+    rot = cal_read_o_time(text)
     text = pd.DataFrame(data=[text], columns=['excerpt'])
     text = CLRDataset(text, False)
     dataframe = text.get_df()
-    dataframe['paragraph_avg_rot'] = cal_read_o_time(dataframe, '\n')
+    dataframe['paragraph_avg_rot'] = rot
     columns_except = ['excerpt']
 
     dataframe = dataframe.drop(columns=columns_except)
