@@ -8,6 +8,8 @@
 
 "Readability" is a webapp measures readability both English and Korean using "XGBoost"
 
+**Site**: https://readability-project.herokuapp.com/
+
 ## Structure
 ```shell
 readability_project
